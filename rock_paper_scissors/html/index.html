@@ -10,13 +10,12 @@
     <h1>Welcome to RPS</h1>
 
     <form action="/make_move" method="POST">
-      <select id="move" name="move">
-        <option value="rock">Rock</option>
-        <option value="paper">Paper</option>
-        <option value="scissors">Scissors</option>
-      </select>
+      <input type="submit" name="move" value="rock"/>
       <br/>
-      <input type="submit" value="Make your move!"/>
+      <input type="submit" name="move" value="paper"/>
+      <br/>
+      <input type="submit" name="move" value="scissors"/>
+      <br/>
     </form>
   </body>
 </html>
