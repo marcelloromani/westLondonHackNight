@@ -1,13 +1,14 @@
 import flask
-import random
+from random import randint
 
 
 app = flask.Flask(__name__, static_url_path='')
+app.secret_key = "dj4390ksjvvcsdfj4f0kc"
 
 moves = ['rock', 'paper', 'scissors']
 
 def choose_random_move():
-    return moves[random.randint(0, len(moves)-1)]
+    return moves[randint(0, len(moves)-1)]
 
 def get_winner(my_move, their_move):
     if my_move == their_move:
@@ -34,10 +35,39 @@ def get_winner(my_move, their_move):
 
 @app.route("/")
 def index():
+    if 'username' not in flask.session:
+        return flask.redirect(flask.url_for('login'))
+
     return flask.send_from_directory("html/", 'index.html')
+
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    if 'username' in flask.session:
+        return flask.redirect(flask.url_for('index'))
+
+    try:
+        username = flask.request.form['username']
+        username.strip()
+        if len(username) == 0:
+            return flask.render_template('login.html')
+        else:
+            flask.session['username'] = username
+            return flask.redirect(flask.url_for('index'))
+    except Exception as e:
+        print(e)
+        return flask.render_template('login.html')
+
+@app.route("/logout", methods=['GET'])
+def logout():
+    flask.session.pop('username', None)
+    return flask.redirect(flask.url_for('login'))
 
 @app.route("/make_move", methods=['POST'])
 def make_move():
+    if not 'username' in flask.session:
+        return flask.redirect(flask.url_for('login'))
+
     user_move = flask.request.form['move']
     print("user made move " + user_move)
 
