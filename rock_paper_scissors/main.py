@@ -41,12 +41,12 @@ def make_move():
     user_move = flask.request.form['move']
     print("user made move " + user_move)
 
-    our_move = choose_random_move()
-    turn_winner = get_winner(our_move, user_move)
+    my_move = choose_random_move()
+    turn_winner = get_winner(my_move, user_move)
 
     return flask.render_template('move_made.html',
         user_move=user_move,
-        our_move=our_move,
+        my_move=my_move,
         winner=turn_winner)
 
 if __name__ == "__main__":
