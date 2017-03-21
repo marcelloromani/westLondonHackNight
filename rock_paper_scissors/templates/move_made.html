@@ -1,0 +1,14 @@
+<!doctype html>
+
+<p>Your move: {{ user_move }}</P>
+<p>My move: {{ our_move }}</P>
+
+{% if winner == "me" %}
+<h1>I win</h1>
+{% elif winner == "them" %}
+<h1>You win</h1>
+{% else %}
+<h1>draw</h1>
+{% endif %}
+
+<a href="/">make another move</a>
