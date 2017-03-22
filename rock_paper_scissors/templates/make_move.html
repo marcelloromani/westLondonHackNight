@@ -1,13 +1,6 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-        "http://www.w3.org/TR/html4/strict.dtd">
-
-<html>
-  <head>
-    <title>Rock Paper Scissors Network Version</title>
-  </head>
-
-  <body>
-    <h1>Welcome to RPS</h1>
+{% extends "base.html" %}
+{% block content %}
+{{ session.username }}, make your move:
 
     <form action="/make_move" method="POST">
       <input type="submit" name="move" value="rock"/>
@@ -17,9 +10,7 @@
       <input type="submit" name="move" value="scissors"/>
       <br/>
     </form>
-
-
     <p/>
     <a href="/logout">Log out</a>
-  </body>
-</html>
+
+  {% endblock %}

@@ -37,8 +37,8 @@ def get_winner(my_move, their_move):
 def index():
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('login'))
-
-    return flask.send_from_directory("html/", 'index.html')
+    else:
+        return flask.render_template('make_move.html')
 
 
 @app.route("/login", methods=['GET', 'POST'])

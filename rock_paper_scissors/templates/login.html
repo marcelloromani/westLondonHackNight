@@ -1,4 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Welcome to RPS</h1>
 <form action="/login" method="POST">
-  Choose a nick name: <input type="text" id="username" name="username"/>
+  Please choose a nick name to join the game.<br/>
+  <input type="text" id="username" name="username"/>
   <input type="submit" />
 </form>
+{% endblock %}
