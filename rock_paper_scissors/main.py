@@ -1,14 +1,15 @@
 import flask
 from random import randint
 
-
 app = flask.Flask(__name__, static_url_path='')
 app.secret_key = "dj4390ksjvvcsdfj4f0kc"
 
 moves = ['rock', 'paper', 'scissors']
 
+
 def choose_random_move():
-    return moves[randint(0, len(moves)-1)]
+    return moves[randint(0, len(moves) - 1)]
+
 
 def get_winner(my_move, their_move):
     if my_move == their_move:
@@ -58,10 +59,12 @@ def login():
         print(e)
         return flask.render_template('login.html')
 
+
 @app.route("/logout", methods=['GET'])
 def logout():
     flask.session.pop('username', None)
     return flask.redirect(flask.url_for('login'))
+
 
 @app.route("/make_move", methods=['POST'])
 def make_move():
@@ -75,9 +78,10 @@ def make_move():
     turn_winner = get_winner(my_move, user_move)
 
     return flask.render_template('move_made.html',
-        user_move=user_move,
-        my_move=my_move,
-        winner=turn_winner)
+                                 user_move=user_move,
+                                 my_move=my_move,
+                                 winner=turn_winner)
+
 
 if __name__ == "__main__":
     app.run()
